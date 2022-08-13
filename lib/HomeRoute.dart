@@ -14,10 +14,43 @@ class HomeRoute extends StatelessWidget {
           child: Column(
             children: <Widget>[
               new Padding(padding: EdgeInsets.all(140.0)),
-              new Padding(padding: EdgeInsets.only(top: 27.0)),
-              new Text(
-                'Home Screen',
-                style: new TextStyle(fontSize: 16.0),
+              ElevatedButton(
+                child: Text('Calender'),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/calender');
+                },
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.blue,
+                    padding: EdgeInsets.symmetric(horizontal: 128, vertical: 12),
+                    textStyle: TextStyle(
+                      fontSize: 20,
+                    )),
+              ),
+              new Padding(padding: EdgeInsets.only(top: 35.0)),
+              ElevatedButton(
+                child: Text('Weather'),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/weather');
+                },
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.blue,
+                    padding: EdgeInsets.symmetric(horizontal: 130, vertical: 12),
+                    textStyle: TextStyle(
+                      fontSize: 20,
+                    )),
+              ),
+              new Padding(padding: EdgeInsets.only(top: 35.0)),
+              ElevatedButton(
+                child: Text('News'),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/news');
+                },
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.blue,
+                    padding: EdgeInsets.symmetric(horizontal: 140, vertical: 12),
+                    textStyle: TextStyle(
+                      fontSize: 20,
+                    )),
               ),
             ],
           )),

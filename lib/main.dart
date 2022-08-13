@@ -1,5 +1,7 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:assignment4/AuthService.dart';
+import 'package:assignment4/News.dart';
+import 'package:assignment4/Weather.dart';
 import 'package:assignment4/Wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'HomeRoute.dart';
 import 'LogIn.dart';
 import 'SignUp.dart';
+import 'Calender.dart';
 // import 'package:firebase_core/firebase_core.dart';
 //import 'package:url_launcher/url_launcher.dart';
 
@@ -34,6 +37,9 @@ class MyApp extends StatelessWidget{
           '/': (context) => Wrapper(),
           '/login': (context) => LogIn(),
           '/signup': (context) => SignUp(),
+          '/calender': (context) => Calender(),
+          '/weather': (context) => Weather(),
+          '/news': (context) => News()
         },
       )
     );
