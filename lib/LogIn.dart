@@ -1,4 +1,6 @@
 import 'package:assignment4/AuthService.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -75,11 +77,12 @@ class LogIn extends StatelessWidget {
                         ),
                         new Padding(padding: EdgeInsets.only(top: 35.0)),
                         ElevatedButton(
-                          onPressed: (){
-                            authService.signInWithEmailAndPassword(
-                                emailController.text,
-                                passwordController.text
-                            );
+                          onPressed: () async{
+                            // authService.signInWithEmailAndPassword(
+                            //     emailController.text,
+                            //     passwordController.text
+                            // );
+                            await logIn();
                             Navigator.pop(context);
                           },
                           child: Text('Log In'),
@@ -92,20 +95,21 @@ class LogIn extends StatelessWidget {
                               )),
                         ),
                         new Padding(padding: EdgeInsets.only(top: 35.0)),
-                        ElevatedButton(
-                          onPressed: (){
-                            Navigator.pushNamed(context, '/signup');
-                          },
-                          child: Text('Sign Up'),
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.blue,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 28, vertical: 12),
-                              textStyle: TextStyle(
-                                fontSize: 20,
-                              )),
-                        ),
+                        GestureDetector(
+                            onTap: (){
+                              Navigator.pushNamed(context, '/signup');
+                            },
+                            child: Text("Doen not have An Account? SignUp",
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 15,
+                                  color: Colors.lightBlueAccent),
+                              textAlign: TextAlign.center,))
                       ])),
                 ))));
+  }
+  Future logIn() async{
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),password: passwordController.text.trim());
   }
 }

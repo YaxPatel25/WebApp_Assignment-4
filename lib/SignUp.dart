@@ -103,23 +103,21 @@ class SignUp extends StatelessWidget {
                               return null;
                             }
                           },
-                          //keyboardType: TextInputType.visiblePassword,
                           style: new TextStyle(
                             fontFamily: "Poppins",
                           ),
                         ),
                         new Padding(padding: EdgeInsets.only(top: 35.0)),
                         ElevatedButton(
-                          onPressed: () {
-                             authService.createInWithEmailAndPassword(
+                          onPressed: () async{
+                             await authService.createInWithEmailAndPassword(
                                  emailController.text,
                                  passwordController.text
                              );
-                             Navigator.pop(context);
+                             Navigator.pushNamed(context, '/');
                           },
                           child: Text('Sign Up'),
 
-                          //style: new TextStyle(color: hexToColor("#F2A03D"), fontSize: 25.0),),
                           style: ElevatedButton.styleFrom(
                               primary: Colors.blue,
                               padding: EdgeInsets.symmetric(
@@ -129,19 +127,17 @@ class SignUp extends StatelessWidget {
                               )),
                         ),
                         new Padding(padding: EdgeInsets.only(top: 35.0)),
-                        ElevatedButton(
-                          onPressed: (){
-                            Navigator.pushNamed(context, '/login');
-                          },
-                          child: Text('Log In'),
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.blue,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 28, vertical: 12),
-                              textStyle: TextStyle(
-                                fontSize: 20,
-                              )),
-                        ),
+                        GestureDetector(
+                            onTap: (){
+                              Navigator.pop(context);
+                            },
+                            child: Text("Have An Account? Log In",
+                              style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              fontSize: 15,
+                              color: Colors.lightBlueAccent
+                            ),
+                              textAlign: TextAlign.center,))
                       ])),
                 ))));
   }
