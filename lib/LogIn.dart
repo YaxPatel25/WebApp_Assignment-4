@@ -4,8 +4,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+//Code for LogIn screen which come at the starting of the app
+
 class LogIn extends StatelessWidget {
 
+  //Declaring variables to get email and password from a user
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -19,20 +22,25 @@ class LogIn extends StatelessWidget {
 
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        // title: "Welcome to Flutter",
         home: new Material(
             child: new Container(
                 padding: const EdgeInsets.all(30.0),
+
+                //Background color
                 color: Colors.white,
                 child: new Container(
                   child: new Center(
                       child: new Column(children: [
                         new Padding(padding: EdgeInsets.fromLTRB(0, 130, 0, 130)),
+
+                        //Code for Log In text
                         new Text(
                           'Log In',
                           style: new TextStyle(fontSize: 35.0),
                         ),
                         new Padding(padding: EdgeInsets.only(top: 50.0)),
+
+                        // Code for email text input
                         new TextFormField(
                           controller: emailController,
                           decoration: new InputDecoration(
@@ -43,6 +51,8 @@ class LogIn extends StatelessWidget {
                               borderRadius: new BorderRadius.circular(25.0),
                             ),
                           ),
+
+                          // Code for checking valid email
                           validator: (val) {
                             if (val!.length == 0) {
                               return "Email cannot be empty";
@@ -52,6 +62,8 @@ class LogIn extends StatelessWidget {
                           },
                         ),
                         new Padding(padding: EdgeInsets.only(top: 35.0)),
+
+                        // Code for getting password from a user
                         new TextFormField(
                           controller: passwordController,
                           obscureText: true,
@@ -64,6 +76,8 @@ class LogIn extends StatelessWidget {
                               borderSide: new BorderSide(),
                             ),
                           ),
+
+                          // Check the password is empty or not
                           validator: (val) {
                             if (val!.length == 0) {
                               return "Password cannot be empty";
@@ -76,12 +90,12 @@ class LogIn extends StatelessWidget {
                           ),
                         ),
                         new Padding(padding: EdgeInsets.only(top: 35.0)),
+
+                        //Code for log in button
                         ElevatedButton(
                           onPressed: () async{
-                            // authService.signInWithEmailAndPassword(
-                            //     emailController.text,
-                            //     passwordController.text
-                            // );
+
+                            // wait for login by fetching data from firebase and redirect to homescreen
                             await logIn();
                             Navigator.pop(context);
                           },
@@ -95,6 +109,8 @@ class LogIn extends StatelessWidget {
                               )),
                         ),
                         new Padding(padding: EdgeInsets.only(top: 35.0)),
+
+                        // Code to redirect signup screen if user want to create an account
                         GestureDetector(
                             onTap: (){
                               Navigator.pushNamed(context, '/signup');
@@ -108,6 +124,8 @@ class LogIn extends StatelessWidget {
                       ])),
                 ))));
   }
+
+  // This function will fetch data from firebase
   Future logIn() async{
     await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),password: passwordController.text.trim());
